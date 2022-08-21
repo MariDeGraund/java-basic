@@ -1,3 +1,4 @@
+import java.io.FileWriter;
 import java.util.Scanner;
 
 class Calculator {
@@ -48,6 +49,10 @@ class Calculator {
         System.out.print("\nРезультат выполнения операции:\n");
         System.out.printf(num1 + " " + op + " " + num2 + " = " + ans);
     }
+
+    int GetResult() {
+        return (int) ans;
+    }
 }
 
 class UserCalculator {
@@ -66,8 +71,7 @@ class UserCalculator {
         try {
             // Считывание операции
             calc.ScanOperation();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             //Попробуем повторить
             System.out.print("\nВведенная операция не соответствует допустимым значениям\nВведите операцию из предложенного списка(+, -, *, /): ");
             calc.ScanOperation();
@@ -87,5 +91,11 @@ class UserCalculator {
         }
         // Вывод результата
         calc.PrintResult();
+        // Сохранение результата в файл
+        try (FileWriter fileResult = new FileWriter("D:/Обучение/Проекты/UnitTest/result.txt", false);) {
+            fileResult.write(calc.GetResult());
+        } catch (Exception e) {
+            System.out.print("\nВозникла ошибка записи результата в файл");
+        }
     }
 }
