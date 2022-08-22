@@ -15,6 +15,12 @@ public class GameTest {
                 }
             }
     }
+
+    public void duplicateNamePlayer(String namePlayer1, String namePlayer2){
+            if (namePlayer1 == namePlayer2) {
+                throw new AssertionError("У игроков одинаковые имена");
+            }
+    }
     public void testGameDeadHeat() {
         String scenario = "Тест на ничью";
 
@@ -33,6 +39,29 @@ public class GameTest {
             equalsFlows(winPlayer1Flow, actualFlow);
 
             equalsFlows(winPlayer2Flow, actualFlow);
+
+            out.printf("\"%s\" passed %n", scenario);
+        } catch (Throwable e) {
+            System.err.printf("\"%s\" fails with message \"%s\" %n", scenario, e.getMessage());
+        }
+    }
+
+    public void testGame() {
+        String scenario = "Тест на одинаковые имена";
+
+        Player player1 = new Player("Влад");
+        Player player2 = new Player("Ира");
+        List<String> winPlayer1Flow = List.of("Победитель: " + player1.getName());
+        List<String> winPlayer2Flow = List.of("Победитель: " + player2.getName());
+        List<String> actualFlow = new ArrayList<>();
+
+        try {
+            DiceImpl diceImpl = new DiceImpl();
+            GameWinnerConsolePrinter win = new GameWinnerConsolePrinter();
+            Game game = new Game(diceImpl, win);
+            game.playGame(player1, player2);
+
+            duplicateNamePlayer(player1.getName(), player2.getName());
 
             out.printf("\"%s\" passed %n", scenario);
         } catch (Throwable e) {

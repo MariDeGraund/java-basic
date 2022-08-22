@@ -17,5 +17,7 @@ public class UnitTest {
         new DiceImplTest().testDiceAvailableValuesNotBig();
 
         new GameTest().testGameDeadHeat();
+
+        new GameTest().testGame();
     }
 } 
