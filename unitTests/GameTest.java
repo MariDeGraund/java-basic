@@ -68,4 +68,36 @@ public class GameTest {
             System.err.printf("\"%s\" fails with message \"%s\" %n", scenario, e.getMessage());
         }
     }
+
+    public void testGameWinPlayer1() {
+        String scenario = "Тест победил игрок 1";
+
+        Player player1 = new Player("Влад");
+        Player player2 = new Player("Ира");
+
+        try {
+            Dice diceSpy2 = new DiceSpy();
+            List<String> actualFlow = new ArrayList<>();
+            GameWinnerConsolePrinterSpy win = new GameWinnerConsolePrinterSpy(actualFlow);
+            Game game = new Game(diceSpy2, win);
+            game.playGame(player2, player1);
+
+            List<String> winPlayer2Flow = List.of("Победитель: " + player2.getName());
+
+            checkWinPlayer1(winPlayer2Flow, GameWinnerConsolePrinterSpy.actualFlow);
+
+            out.printf("\"%s\" passed %n", scenario);
+        } catch (Throwable e) {
+            System.err.printf("\"%s\" fails with message \"%s\" %n", scenario, e.getMessage());
+        }
+    }
+
+    private void checkWinPlayer1(List<String> unExpectedFlow, List<String> actualFlow) {
+            for (int i = 0; i < unExpectedFlow.size(); i++) {
+                if (unExpectedFlow.equals(actualFlow)) {
+                    throw new AssertionError(String.format("Победил игрок 2 \"%s\"",
+                            actualFlow));
+                }
+            }
+    }
 }

@@ -4,7 +4,7 @@ import ru.otus.game.*;
 import java.util.List;
 
 public class GameWinnerConsolePrinterSpy implements GameWinnerPrinter {
-    private final List<String> actualFlow;
+    public static List<String> actualFlow;
 
     public GameWinnerConsolePrinterSpy(List<String> actualFlow) {
         this.actualFlow = actualFlow;

@@ -19,5 +19,7 @@ public class UnitTest {
         new GameTest().testGameDeadHeat();
 
         new GameTest().testGame();
+
+        new GameTest().testGameWinPlayer1();
     }
 } 
