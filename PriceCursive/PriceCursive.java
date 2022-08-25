@@ -5,13 +5,12 @@ import java.util.Collections;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-class Currency {
+class CurrencyRub implements Currency {
     static String[] currency = {"рубль", "рубля", "рублей"};
 
     public String getCurrency(int i) {
         return currency[i];
     }
-
 }
 
 public class PriceCursive {
@@ -59,7 +58,7 @@ public class PriceCursive {
         long price_tmp = price;
 
         // Разбить на сегменты по 3
-        ArrayList <Long> segments = new ArrayList<>();
+        ArrayList<Long> segments = new ArrayList<>();
         while (price_tmp > 999) {
             long seg = price_tmp / 1000;
             segments.add(price_tmp - (seg * 1000));
@@ -122,7 +121,7 @@ public class PriceCursive {
 
         int resMod = getMod(resultMod);
 
-        Currency currency = new Currency();
+        CurrencyRub currency = new CurrencyRub();
         return strResult + " " + currency.getCurrency(resMod);
     }
 
